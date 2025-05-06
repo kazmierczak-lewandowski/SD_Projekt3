@@ -37,6 +37,9 @@ bool DoublyLinkedList::remove(const Element element) {
     return false;
   }
   if (getSize() == 1) {
+    if (head->data != element) {
+      return false;
+    }
     head = nullptr;
     tail = nullptr;
     setSize(getSize() - 1);
