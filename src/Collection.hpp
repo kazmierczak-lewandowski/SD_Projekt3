@@ -15,6 +15,7 @@ class Collection {
   virtual bool remove(Element element) = 0;
   virtual bool findAndReplace(Element element) = 0;
   int getSize() const { return size; }
+  bool isEmpty() const { return size == 0; }
 };
 
 #endif  // COLLECTION_HPP

@@ -6,6 +6,8 @@ add_library(StructuresLib STATIC
         Utils.hpp
         Collection.cpp
         Collection.hpp
+        DoublyLinkedList.cpp
+        DoublyLinkedList.hpp
 )
 target_include_directories(StructuresLib
         PUBLIC
