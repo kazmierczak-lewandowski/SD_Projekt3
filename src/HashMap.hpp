@@ -11,7 +11,7 @@
 enum class BucketType { AVL, BST, DLL };
 class HashMap {
  private:
-  std::unique_ptr<Collection[]> table;
+  std::unique_ptr<std::unique_ptr<Collection>[]> table;
   static constexpr int CAPACITY = 100'000;
   static constexpr int A = 1'234'567;
   static constexpr int B = 987'654;
