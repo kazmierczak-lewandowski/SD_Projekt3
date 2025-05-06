@@ -1,5 +1,8 @@
 #include "DoublyLinkedList.hpp"
 DoublyLinkedList::Node *DoublyLinkedList::find(const Element element) const {
+  if (isEmpty()) {
+    return nullptr;
+  }
   Node *currentFront = head.get();
   Node *currentBack = tail;
   int itFront = 0;
@@ -13,7 +16,9 @@ DoublyLinkedList::Node *DoublyLinkedList::find(const Element element) const {
     }
     currentFront = currentFront->next.get();
     itFront++;
-
+    if (itFront > itBack) {
+      break;
+    }
     currentBack = currentBack->prev;
     itBack--;
   }
@@ -37,7 +42,7 @@ bool DoublyLinkedList::remove(const Element element) {
     return false;
   }
   if (getSize() == 1) {
-    if (head->data != element) {
+    if (!head->data.checkKey(element)) {
       return false;
     }
     head = nullptr;
@@ -59,6 +64,7 @@ bool DoublyLinkedList::remove(const Element element) {
   }
   Node *current = find(element);
   if (current == nullptr) return false;
+
   current = current->prev;
   current->next->next->prev = current;
   current->next = std::move(current->next->next);

@@ -80,9 +80,9 @@ TEST_F(DoublyLinkedListTest, RemoveNonExistentElement) {
 
 TEST_F(DoublyLinkedListTest, RemoveAllElements) {
   const auto list = getList();
+  EXPECT_TRUE(list->remove(Element{3, 30}));
   EXPECT_TRUE(list->remove(Element{1, 10}));
   EXPECT_TRUE(list->remove(Element{2, 20}));
-  EXPECT_TRUE(list->remove(Element{3, 30}));
   EXPECT_TRUE(list->remove(Element{4, 40}));
 
   EXPECT_EQ(list->getSize(), 0);
