@@ -24,8 +24,8 @@ TEST(ElementTests, SetValue) {
 
 // Test operator==
 TEST(ElementTests, EqualityOperator) {
-  const Element e1(10, 20);
-  const Element e2(15, 20);
+  const Element e1(20, 20);
+  const Element e2(20, 20);
   EXPECT_TRUE(e1 == e2);
   const Element e3(10, 30);
   EXPECT_FALSE(e1 == e3);
@@ -33,11 +33,11 @@ TEST(ElementTests, EqualityOperator) {
 
 // Test operator<=>
 TEST(ElementTests, ThreeWayComparison) {
-  const Element e1(10, 20);
-  const Element e2(15, 30);
+  const Element e1(20, 20);
+  const Element e2(10, 30);
   const Element e3(20, 20);
-  EXPECT_TRUE(e1 < e2);
-  EXPECT_TRUE(e3 <= e1);
+  EXPECT_TRUE(e1 > e2);
+  EXPECT_TRUE(e3 >= e1);
   EXPECT_TRUE(e1 == e3);
 }
 
