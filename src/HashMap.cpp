@@ -18,11 +18,22 @@ HashMap::HashMap(const BucketType type) {
   }
 }
 void HashMap::insert(const Element element) {
-  const int hashBase = HashMap::hashBase(element.getKey());
-  const int hashAlt = HashMap::hashAlt(element.getKey());
+  const int hashAlt = hashAlt(element.getKey());
+  const int hashBase = hashBase(element.getKey());
+
+  if (table[hashBase].findAndReplace(element) ||
+      table[hashAlt].findAndReplace(element)) {
+    return;
+  }
   if (table[hashBase].getSize() < table[hashAlt].getSize()) {
     table[hashBase].insert(element);
     return;
   }
   table[hashAlt].insert(element);
+}
+void HashMap::remove(const Element element) {
+  if (table[hashBase(element.getKey())].remove(element)) {
+    return;
+  }
+  table[hashAlt(element.getKey())].remove(element);
 }

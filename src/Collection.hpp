@@ -12,7 +12,8 @@ class Collection {
  public:
   virtual ~Collection() = default;
   virtual void insert(Element element) = 0;
-  virtual void remove(Element element) = 0;
+  virtual bool remove(Element element) = 0;
+  virtual bool findAndReplace(Element element) = 0;
   int getSize() const { return size; }
 };
 

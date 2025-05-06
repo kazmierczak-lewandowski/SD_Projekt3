@@ -14,8 +14,8 @@ class Element {
     return os << "key: " << obj.key << " value: " << obj.value;
   }
   Element() : key(-1), value(-1) {}
-  auto operator<=>(const Element &other) const { return value <=> other.value; }
-  bool operator==(const Element &other) const { return value == other.value; }
+  auto operator<=>(const Element &other) const { return key <=> other.key; }
+  bool operator==(const Element &other) const { return value == other.value && key == other.key; }
   void setValue(const int newValue) { this->value = newValue; }
   [[nodiscard]] int getKey() const { return key; }
   [[nodiscard]] int getValue() const { return value; }
