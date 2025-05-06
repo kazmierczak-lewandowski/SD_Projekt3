@@ -109,3 +109,60 @@ TEST_F(AvlTest, FindAndReplaceNonExistentElement) {
   EXPECT_FALSE(tree->findAndReplace(nonExistent));
   EXPECT_EQ(tree->getSize(), 4);
 }
+TEST(AVLTreeTests, RRRotationParentRight) {
+  AVLTree avl;
+  avl.insert(Element{5, 1});
+  avl.insert(Element{6, 2});
+  avl.insert(Element{4, 3});
+  avl.insert(Element{7, 4});
+  avl.insert(Element{8, 5});
+  EXPECT_TRUE(isCorrect(avl.getRoot()));
+  EXPECT_TRUE(isBalanced(avl.getRoot()));
+}
+TEST(AVLTreeTests, RRRotationParentLeft) {
+  AVLTree avl;
+  avl.insert(Element{10, 1});
+  avl.insert(Element{6, 2});
+  avl.insert(Element{11, 3});
+  avl.insert(Element{7, 4});
+  avl.insert(Element{8, 5});
+  EXPECT_TRUE(isCorrect(avl.getRoot()));
+  EXPECT_TRUE(isBalanced(avl.getRoot()));
+}
+
+TEST(AVLTreeTests, RRRotationWithRoot) {
+  AVLTree avl;
+  avl.insert(Element{1, 1});
+  avl.insert(Element{2, 2});
+  avl.insert(Element{3, 3});
+  EXPECT_TRUE(isCorrect(avl.getRoot()));
+  EXPECT_TRUE(isBalanced(avl.getRoot()));
+}
+TEST(AVLTreeTests, LLRotationWithRoot) {
+  AVLTree avl;
+  avl.insert(Element{3, 3});
+  avl.insert(Element{2, 2});
+  avl.insert(Element{1, 1});
+  EXPECT_TRUE(isCorrect(avl.getRoot()));
+  EXPECT_TRUE(isBalanced(avl.getRoot()));
+}
+TEST(AVLTreeTests, LLRotationParentLeft) {
+  AVLTree avl;
+  avl.insert(Element{10, 1});
+  avl.insert(Element{6, 2});
+  avl.insert(Element{11, 3});
+  avl.insert(Element{5, 4});
+  avl.insert(Element{4, 5});
+  EXPECT_TRUE(isCorrect(avl.getRoot()));
+  EXPECT_TRUE(isBalanced(avl.getRoot()));
+}
+TEST(AVLTreeTests, LLRotationParentRight) {
+  AVLTree avl;
+  avl.insert(Element{10, 1});
+  avl.insert(Element{12, 2});
+  avl.insert(Element{8, 3});
+  avl.insert(Element{7, 4});
+  avl.insert(Element{6, 5});
+  EXPECT_TRUE(isCorrect(avl.getRoot()));
+  EXPECT_TRUE(isBalanced(avl.getRoot()));
+}
