@@ -1,0 +1,26 @@
+add_library(StructuresLib STATIC
+        HashMap.hpp
+        Element.hpp
+        HashMap.cpp
+        Utils.cpp
+        Utils.hpp
+        Collection.cpp
+        Collection.hpp
+)
+target_include_directories(StructuresLib
+        PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+add_executable(Structures
+        main.cpp
+)
+target_include_directories(Structures
+        PRIVATE
+        StructuresLib
+)
+target_link_libraries(Structures
+        PRIVATE
+        StructuresLib
+        ${CURSES_LIBRARIES}
+)
