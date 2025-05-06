@@ -81,3 +81,38 @@ TEST_F(DoublyLinkedListTest, RemoveAllElements) {
     EXPECT_EQ(list.getHead(), nullptr);
     EXPECT_EQ(list.getTail(), nullptr);
 }
+TEST_F(DoublyLinkedListTest, FindAndReplaceExistingElement) {
+  const Element newElement{3, 300};
+  EXPECT_TRUE(list.findAndReplace(newElement));
+
+  EXPECT_EQ(list.getSize(), 4);
+}
+
+TEST_F(DoublyLinkedListTest, FindAndReplaceNonExistentElement) {
+  const Element nonExistent{99, 999};
+  EXPECT_FALSE(list.findAndReplace(nonExistent));
+  EXPECT_EQ(list.getSize(), 4);
+}
+
+TEST_F(DoublyLinkedListTest, FindAndReplaceUpdatesCorrectNode) {
+  const Element updated{2, 222};
+  EXPECT_TRUE(list.findAndReplace(updated));
+
+  auto node = list.getHead();
+  bool found = false;
+  while (node) {
+    if (node->data == updated) {
+      found = true;
+      EXPECT_EQ(node->data.getValue(), 222);
+      break;
+    }
+    node = node->next.get();
+  }
+  EXPECT_TRUE(found);
+}
+
+TEST(DoublyLinkedListStandaloneTest, FindAndReplaceOnEmptyList) {
+  DoublyLinkedList emptyList;
+  EXPECT_FALSE(emptyList.findAndReplace(Element{1, 100}));
+  EXPECT_EQ(emptyList.getSize(), 0);
+}

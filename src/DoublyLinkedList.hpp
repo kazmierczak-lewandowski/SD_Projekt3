@@ -13,7 +13,8 @@ class DoublyLinkedList final : public Collection {
   };
   std::unique_ptr<Node> head = nullptr;
   Node *tail = nullptr;
-  Node* find(Element element) const;
+  Node *find(Element element) const;
+
  public:
   void insert(Element element) override;
   bool remove(Element element) override;

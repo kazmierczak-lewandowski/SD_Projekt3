@@ -7,11 +7,11 @@ DoublyLinkedList::Node *DoublyLinkedList::find(const Element element) const {
   while (itFront <= itBack) {
     currentFront = currentFront->next.get();
     itFront++;
-    if (currentFront->data == element) {
+    if (currentFront->data.checkKey(element)) {
       return currentFront;
     }
     currentBack = currentBack->prev;
-    if (currentBack->data == element) {
+    if (currentBack->data.checkKey(element)) {
       return currentBack;
     }
     itBack--;
