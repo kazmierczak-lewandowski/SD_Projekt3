@@ -4,18 +4,15 @@
 
 #include <cmath>
 #include <fstream>
-#include <iostream>
 #include <memory>
-#include <vector>
 
 #include "Collection.hpp"
 #include "Element.hpp"
-#include "Utils.hpp"
 enum class BucketType { AVL, BST, DLL };
 class HashMap {
  private:
   std::unique_ptr<Collection[]> table;
-  constexpr int CAPACITY = 100'000;
+  static constexpr int CAPACITY = 100'000;
   int hashBase();
   int hashAlt();
 
