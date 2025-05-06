@@ -13,8 +13,11 @@ class HashMap {
  private:
   std::unique_ptr<Collection[]> table;
   static constexpr int CAPACITY = 100'000;
-  int hashBase();
-  int hashAlt();
+  static constexpr int A = 1'234'567;
+  static constexpr int B = 987'654;
+  static constexpr int P = 5'000'003;
+  static int hashBase(int key);
+  static int hashAlt(int key);
 
  public:
   explicit HashMap(BucketType type);

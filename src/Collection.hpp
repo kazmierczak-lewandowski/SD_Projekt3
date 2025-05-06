@@ -1,5 +1,6 @@
 #ifndef COLLECTION_HPP
 #define COLLECTION_HPP
+#include "Element.hpp"
 
 class Collection {
  private:
@@ -10,8 +11,9 @@ class Collection {
 
  public:
   virtual ~Collection() = default;
-  virtual void insert() = 0;
-  virtual void remove() = 0;
+  virtual void insert(Element element) = 0;
+  virtual void remove(Element element) = 0;
+  int getSize() const { return size; }
 };
 
 #endif  // COLLECTION_HPP
