@@ -25,6 +25,7 @@ public:
     return root.get();
   }
   bool remove(Element element) override;
+  bool findAndReplace(Element element) override;
 private:
   std::unique_ptr<AVLNode> root = nullptr;
   void LLRotation(std::unique_ptr<AVLNode> &current);
@@ -36,7 +37,6 @@ private:
   static void updateHeight(AVLNode *node);
   void updateBalanceUp(AVLNode *node);
   void deleteNode(AVLNode *node);
-  bool findAndReplace(Element element) override;
 };
 
 #endif // AVLTree_HPP

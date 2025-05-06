@@ -96,7 +96,7 @@ bool AVLTree::remove(const Element element) {
 
 AVLTree::AVLNode *AVLTree::findElement(const Element &element) const {
   AVLNode *current = root.get();
-  while (current != nullptr && current->element != element) {
+  while (current != nullptr && current->element.getKey() != element.getKey()) {
     if (element < current->element) {
       current = current->left.get();
       continue;
