@@ -32,19 +32,19 @@ void HashMap::insert(const Element element) {
   const int hashAlt = HashMap::hashAlt(element.getKey());
   const int hashBase = HashMap::hashBase(element.getKey());
 
-  if (table[hashBase].findAndReplace(element) ||
-      table[hashAlt].findAndReplace(element)) {
+  if (table[hashBase]->findAndReplace(element) ||
+      table[hashAlt]->findAndReplace(element)) {
     return;
   }
-  if (table[hashBase].getSize() < table[hashAlt].getSize()) {
-    table[hashBase].insert(element);
+  if (table[hashBase]->getSize() < table[hashAlt]->getSize()) {
+    table[hashBase]->insert(element);
     return;
   }
-  table[hashAlt].insert(element);
+  table[hashAlt]->insert(element);
 }
 void HashMap::remove(const Element element) {
-  if (table[HashMap::hashBase(element.getKey())].remove(element)) {
+  if (table[HashMap::hashBase(element.getKey())]->remove(element)) {
     return;
   }
-  table[HashMap::hashAlt(element.getKey())].remove(element);
+  table[HashMap::hashAlt(element.getKey())]->remove(element);
 }
