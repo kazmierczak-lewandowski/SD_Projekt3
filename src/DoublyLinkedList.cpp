@@ -32,7 +32,7 @@ void DoublyLinkedList::insert(Element element) {
   setSize(getSize() + 1);
 }
 bool DoublyLinkedList::remove(const Element element) {
-  if (getSize() == 0) {
+  if (isEmpty()) {
     return false;
   }
   if (getSize() == 1) {
@@ -61,4 +61,9 @@ bool DoublyLinkedList::remove(const Element element) {
   setSize(getSize() - 1);
   return true;
 }
-bool DoublyLinkedList::findAndReplace(Element element) { return false; }
+bool DoublyLinkedList::findAndReplace(const Element element) {
+        Node *current = find(element);
+        if (current == nullptr) return false;
+        current->data = element;
+        return true;
+}

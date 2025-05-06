@@ -6,13 +6,13 @@
 class DoublyLinkedList final : public Collection {
  private:
   struct Node {
-    std::unique_ptr<Node> next = nullptr;  ///< Pointer to the next node.
-    Node *prev = nullptr;                  ///< Pointer to the previous node.
-    Element data;                              ///< Data stored in the node.
+    std::unique_ptr<Node> next = nullptr;
+    Node *prev = nullptr;
+    Element data;
     explicit Node(const Element element) : data(element) {}
   };
-  std::unique_ptr<Node> head = nullptr;  ///< Pointer to the first node.
-  Node *tail = nullptr;                  ///< Pointer to the last node.
+  std::unique_ptr<Node> head = nullptr;
+  Node *tail = nullptr;
   Node* find(Element element) const;
  public:
   void insert(Element element) override;
