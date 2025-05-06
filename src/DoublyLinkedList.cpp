@@ -5,15 +5,16 @@ DoublyLinkedList::Node *DoublyLinkedList::find(const Element element) const {
   int itFront = 0;
   int itBack = getSize() - 1;
   while (itFront <= itBack) {
-    currentFront = currentFront->next.get();
-    itFront++;
     if (currentFront->data.checkKey(element)) {
       return currentFront;
     }
-    currentBack = currentBack->prev;
     if (currentBack->data.checkKey(element)) {
       return currentBack;
     }
+    currentFront = currentFront->next.get();
+    itFront++;
+
+    currentBack = currentBack->prev;
     itBack--;
   }
   return nullptr;
