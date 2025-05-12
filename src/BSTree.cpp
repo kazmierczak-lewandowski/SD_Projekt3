@@ -2,31 +2,14 @@
 
 #include "Utils.hpp"
 void BSTree::insert(Element element) {
-  auto newNode = std::make_unique<Utils::TreeNode>(element);
   if (isEmpty()) {
+    auto newNode = std::make_unique<Utils::TreeNode>(element);
     root = std::move(newNode);
     setSize(getSize() + 1);
     return;
   }
-  auto current = getRoot();
-  Utils::TreeNode *parent = nullptr;
-  while (current != nullptr) {
-    parent = current;
-    if (newNode->element < current->element) {
-      current = current->left.get();
-      continue;
-    }
-    current = current->right.get();
-  }
-  newNode->parent = parent;
-  if (parent != nullptr) {
-    if (newNode->element < parent->element) {
-      parent->left = std::move(newNode);
-    } else {
-      parent->right = std::move(newNode);
-    }
-  }
-  setSize(getSize() + 1);
+  Utils::TreeNode *parent;
+  Tree::insert(element, parent);
 }
 void BSTree::deleteNode(Utils::TreeNode *node) {
 

@@ -4,7 +4,6 @@ add_library(StructuresLib STATIC
         HashMap.cpp
         Utils.cpp
         Utils.hpp
-        Collection.cpp
         Collection.hpp
         AVLTree.cpp
         AVLTree.hpp

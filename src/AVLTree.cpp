@@ -3,32 +3,15 @@
 #include <algorithm>
 #include <queue>
 
-void AVLTree::insert(Element element) {
-  auto newNode = std::make_unique<Utils::TreeNode>(element);
+void AVLTree::insert(const Element element) {
   if (isEmpty()) {
+    auto newNode = std::make_unique<Utils::TreeNode>(element);
     root = std::move(newNode);
     setSize(getSize() + 1);
     return;
   }
-  auto current = root.get();
-  Utils::TreeNode *parent = nullptr;
-  while (current != nullptr) {
-    parent = current;
-    if (newNode->element < current->element) {
-      current = current->left.get();
-      continue;
-    }
-    current = current->right.get();
-  }
-  newNode->parent = parent;
-  if (parent != nullptr) {
-    if (newNode->element < parent->element) {
-      parent->left = std::move(newNode);
-    } else {
-      parent->right = std::move(newNode);
-    }
-  }
-  setSize(getSize() + 1);
+  Utils::TreeNode *parent;
+  Tree::insert(element, parent);
   updateBalanceUp(parent);
 }
 
@@ -38,7 +21,7 @@ void AVLTree::deleteNode(Utils::TreeNode *node) {
   Utils::TreeNode *parent = node->parent;
 
   if (node->left == nullptr && node->right == nullptr) {
-    if (node == root.get()) {
+    if (node == getRoot()) {
       root.reset();
     } else {
       if (parent->left.get() == node)
@@ -52,7 +35,7 @@ void AVLTree::deleteNode(Utils::TreeNode *node) {
   else if (node->left == nullptr || node->right == nullptr) {
     std::unique_ptr<Utils::TreeNode> &child =
         (node->left) ? node->left : node->right;
-    if (node == root.get()) {
+    if (node == getRoot()) {
       root = std::move(child);
       root->parent = nullptr;
     } else {
@@ -108,7 +91,7 @@ void AVLTree::RRRotation(std::unique_ptr<Utils::TreeNode> &current) {
   updateHeight(original);
   if (parent == nullptr) {
     root = std::move(currentRight);
-    updateHeight(root.get());
+    updateHeight(getRoot());
   } else {
     if (parentLeft == original) {
       parent->left = std::move(currentRight);
@@ -143,7 +126,7 @@ void AVLTree::LLRotation(std::unique_ptr<Utils::TreeNode> &current) {
   updateHeight(original);
   if (parent == nullptr) {
     root = std::move(currentLeft);
-    updateHeight(root.get());
+    updateHeight(getRoot());
   } else {
     if (parentLeft == original) {
       parent->left = std::move(currentLeft);
@@ -174,7 +157,7 @@ void AVLTree::balance(Utils::TreeNode *current) {
 
   if (const int balance_factor = checkBalance(current); balance_factor > 1) {
     if (checkBalance(current->left.get()) >= 0) {
-      if (current == root.get()) {
+      if (current == getRoot()) {
         LLRotation(root);
       } else if (current->parent->left.get() == current) {
         LLRotation(current->parent->left);
@@ -182,7 +165,7 @@ void AVLTree::balance(Utils::TreeNode *current) {
         LLRotation(current->parent->right);
       }
     } else {
-      if (current == root.get()) {
+      if (current == getRoot()) {
         LRRotation(root);
       } else if (current->parent->left.get() == current) {
         LRRotation(current->parent->left);
@@ -192,7 +175,7 @@ void AVLTree::balance(Utils::TreeNode *current) {
     }
   } else if (balance_factor < -1) {
     if (checkBalance(current->right.get()) <= 0) {
-      if (current == root.get()) {
+      if (current == getRoot()) {
         RRRotation(root);
       } else if (current->parent->left.get() == current) {
         RRRotation(current->parent->left);
@@ -200,7 +183,7 @@ void AVLTree::balance(Utils::TreeNode *current) {
         RRRotation(current->parent->right);
       }
     } else {
-      if (current == root.get()) {
+      if (current == getRoot()) {
         RLRotation(root);
       } else if (current->parent->left.get() == current) {
         RLRotation(current->parent->left);
@@ -220,7 +203,7 @@ void AVLTree::updateBalanceUp(Utils::TreeNode *node) {
   while (node != nullptr) {
     updateHeight(node);
     if (std::abs(checkBalance(node)) > 1) {
-      if (node == root.get()) {
+      if (node == getRoot()) {
         balance(node);
         continue;
       }
