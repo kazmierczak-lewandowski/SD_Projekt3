@@ -1,7 +1,7 @@
 #include "BSTree.hpp"
 
 #include "Utils.hpp"
-void BSTree::insert(Element element) {
+void BSTree::add(Element element) {
   if (isEmpty()) {
     auto newNode = std::make_unique<Utils::TreeNode>(element);
     root = std::move(newNode);
@@ -9,7 +9,7 @@ void BSTree::insert(Element element) {
     return;
   }
   Utils::TreeNode *parent;
-  Tree::insert(element, parent);
+  insert(element, parent);
 }
 void BSTree::deleteNode(Utils::TreeNode *node) {
   if (node->left == nullptr && node->right == nullptr) {

@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <queue>
 
-void AVLTree::insert(const Element element) {
+void AVLTree::add(const Element element) {
   if (isEmpty()) {
     auto newNode = std::make_unique<Utils::TreeNode>(element);
     root = std::move(newNode);
@@ -11,7 +11,7 @@ void AVLTree::insert(const Element element) {
     return;
   }
   Utils::TreeNode *parent;
-  Tree::insert(element, parent);
+  insert(element, parent);
   updateBalanceUp(parent);
 }
 void AVLTree::deleteNode(Utils::TreeNode *node) {
