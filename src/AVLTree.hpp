@@ -21,9 +21,10 @@ class AVLTree final : public Tree {
  public:
   ~AVLTree() override = default;
   void insert(Element element) override;
-  [[nodiscard]] Utils::TreeNode *getRoot() const override {
-    return root.get();
-  };
+  [[nodiscard]] Utils::TreeNode *getRoot() const override { return root.get(); }
+
+ protected:
+  void resetRoot() override { root.reset(); };
 };
 
 #endif  // AVLTree_HPP

@@ -10,6 +10,9 @@ class BSTree final : public Tree {
   std::unique_ptr<Utils::TreeNode> root = nullptr;
   void deleteNode(Utils::TreeNode* node) override;
 
+ protected:
+  void resetRoot() override { root.reset(); };
+
  public:
   void insert(Element element) override;
   [[nodiscard]] Utils::TreeNode* getRoot() const override {

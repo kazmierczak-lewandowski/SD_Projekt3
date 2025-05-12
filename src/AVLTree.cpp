@@ -18,15 +18,7 @@ void AVLTree::deleteNode(Utils::TreeNode *node) {
   Utils::TreeNode *parent = node->parent;
 
   if (node->left == nullptr && node->right == nullptr) {
-    if (node == getRoot()) {
-      root.reset();
-    } else {
-      if (parent->left.get() == node)
-        parent->left.reset();
-      else
-        parent->right.reset();
-    }
-    setSize(getSize() - 1);
+    parent = removeNodeWithoutChildren(node);
   }
 
   else if (node->left == nullptr || node->right == nullptr) {

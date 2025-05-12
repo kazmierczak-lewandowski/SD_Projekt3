@@ -50,3 +50,17 @@ bool Tree::findAndReplace(const Element element) {
   insert(newElement);
   return true;
 }
+Utils::TreeNode *Tree::removeNodeWithoutChildren(
+    const Utils::TreeNode *node) {
+  Utils::TreeNode *parent = node->parent;
+  if (node == getRoot()) {
+    resetRoot();
+  } else {
+    if (parent->left.get() == node)
+      parent->left.reset();
+    else
+      parent->right.reset();
+  }
+  setSize(getSize() - 1);
+  return parent;
+}
