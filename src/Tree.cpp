@@ -32,6 +32,14 @@ Utils::TreeNode* Tree::findElement(const Element &element) const {
   }
   return current;
 }
+bool Tree::remove(const Element element) {
+  const auto node = findElement(element);
+  if (node == nullptr) {
+    return false;
+  }
+  deleteNode(node);
+  return true;
+}
 bool Tree::findAndReplace(const Element element) {
   const auto node = findElement(element);
   if (node == nullptr) {

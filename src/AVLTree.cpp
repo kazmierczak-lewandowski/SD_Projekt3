@@ -14,10 +14,7 @@ void AVLTree::insert(const Element element) {
   Tree::insert(element, parent);
   updateBalanceUp(parent);
 }
-
 void AVLTree::deleteNode(Utils::TreeNode *node) {
-  if (node == nullptr) return;
-
   Utils::TreeNode *parent = node->parent;
 
   if (node->left == nullptr && node->right == nullptr) {
@@ -57,15 +54,6 @@ void AVLTree::deleteNode(Utils::TreeNode *node) {
   }
 
   updateBalanceUp(parent);
-}
-
-bool AVLTree::remove(const Element element) {
-  const auto node = findElement(element);
-  if (node == nullptr) {
-    return false;
-  }
-  deleteNode(node);
-  return true;
 }
 void AVLTree::RRRotation(std::unique_ptr<Utils::TreeNode> &current) {
   std::unique_ptr<Utils::TreeNode> currentRight = std::move(current->right);

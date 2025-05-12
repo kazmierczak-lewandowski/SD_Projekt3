@@ -7,6 +7,7 @@ class Tree : public Collection {
  protected:
   virtual void deleteNode(Utils::TreeNode *node) = 0;
  public:
+  bool remove(Element element) override;
   bool findAndReplace(Element element) override;
   void insert(Element element, Utils::TreeNode*& parent);
   void insert(Element element) override = 0;

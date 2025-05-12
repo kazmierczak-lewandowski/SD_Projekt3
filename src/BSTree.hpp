@@ -12,7 +12,6 @@ class BSTree final : public Tree {
 
  public:
   void insert(Element element) override;
-  bool remove(Element element) override;
   [[nodiscard]] Utils::TreeNode* getRoot() const override {
     return root.get();
   };

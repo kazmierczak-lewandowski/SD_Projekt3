@@ -12,7 +12,6 @@ void BSTree::insert(Element element) {
   Tree::insert(element, parent);
 }
 void BSTree::deleteNode(Utils::TreeNode *node) {
-
   Utils::TreeNode *parent = node->parent;
 
   if (node->left == nullptr && node->right == nullptr) {
@@ -49,13 +48,4 @@ void BSTree::deleteNode(Utils::TreeNode *node) {
     node->element = successor->element;
     deleteNode(successor);
   }
-}
-
-bool BSTree::remove(const Element element) {
-  const auto node = findElement(element);
-  if (node == nullptr) {
-    return false;
-  }
-  deleteNode(node);
-  return true;
 }
