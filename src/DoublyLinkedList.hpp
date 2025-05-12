@@ -13,16 +13,16 @@ class DoublyLinkedList final : public Collection {
   };
   std::unique_ptr<Node> head = nullptr;
   Node *tail = nullptr;
-  Node *find(Element element) const;
+  [[nodiscard]] Node *find(Element element) const;
 
  public:
   void insert(Element element) override;
   bool remove(Element element) override;
   bool findAndReplace(Element element) override;
-  Node *getHead() const {
+  [[nodiscard]] Node *getHead() const {
     return head.get();
   }
-  Node *getTail() const {
+  [[nodiscard]] Node *getTail() const {
     return tail;
   }
 };

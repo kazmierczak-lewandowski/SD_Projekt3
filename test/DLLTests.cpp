@@ -89,6 +89,15 @@ TEST_F(DoublyLinkedListTest, RemoveAllElements) {
   EXPECT_EQ(list->getHead(), nullptr);
   EXPECT_EQ(list->getTail(), nullptr);
 }
+TEST_F(DoublyLinkedListTest, RemoveElementFromTail) {
+  const auto list = getList();
+  EXPECT_TRUE(list->remove(Element{4, 40}));
+
+  EXPECT_EQ(list->getSize(), 3);
+  EXPECT_NE(list->getTail(), nullptr);
+  EXPECT_EQ(list->getTail()->data, Element(3, 30));
+  EXPECT_EQ(list->getTail()->next, nullptr);
+}
 TEST_F(DoublyLinkedListTest, FindAndReplaceExistingElement) {
   const auto list = getList();
   const Element newElement{3, 300};

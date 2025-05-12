@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
-#include "../src/Avl.hpp"
+#include "../src/AVLTree.hpp"
 #include "../src/Element.hpp"
-bool isCorrect(const AVLTree::AVLNode *node) {  // NOLINT(*-no-recursion)
+bool isCorrect(const Utils::TreeNode *node) {  // NOLINT(*-no-recursion)
   if (node == nullptr) return true;
   if (node->left &&
       (node->left->element > node->element || node->left->parent != node)) {
@@ -15,7 +15,7 @@ bool isCorrect(const AVLTree::AVLNode *node) {  // NOLINT(*-no-recursion)
   return isCorrect(node->left.get()) && isCorrect(node->right.get());
 }
 
-bool isBalanced(const AVLTree::AVLNode *node) {  // NOLINT(*-no-recursion)
+bool isBalanced(const Utils::TreeNode *node) {  // NOLINT(*-no-recursion)
   if (node == nullptr) return true;
 
   const int leftHeight = node->left ? node->left->height : -1;

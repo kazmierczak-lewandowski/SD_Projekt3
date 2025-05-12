@@ -4,12 +4,15 @@ add_library(StructuresLib STATIC
         HashMap.cpp
         Utils.cpp
         Utils.hpp
-        Collection.cpp
         Collection.hpp
-        Avl.cpp
-        Avl.hpp
+        AVLTree.cpp
+        AVLTree.hpp
         DoublyLinkedList.cpp
         DoublyLinkedList.hpp
+        BSTree.cpp
+        BSTree.hpp
+        Tree.cpp
+        Tree.hpp
 )
 target_include_directories(StructuresLib
         PUBLIC
