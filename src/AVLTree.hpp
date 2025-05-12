@@ -19,7 +19,6 @@ private:
   void deleteNode(Utils::TreeNode *node);
 
 public:
-  explicit AVLTree() = default;
   ~AVLTree() override = default;
   void insert(Element element) override;
   [[nodiscard]] Utils::TreeNode* findElement(const Element &element) const;
