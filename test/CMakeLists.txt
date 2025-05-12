@@ -4,6 +4,7 @@ add_executable(Tests
         ElementTests.cpp
         DLLTests.cpp
         AVLtests.cpp
+        BSTreeTests.cpp
 )
 include_directories(${GTEST_INCLUDE_DIRS})
 target_link_libraries(Tests
