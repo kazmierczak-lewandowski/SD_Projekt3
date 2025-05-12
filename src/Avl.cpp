@@ -4,14 +4,14 @@
 #include <queue>
 
 void AVLTree::insert(Element element) {
-  auto newNode = std::make_unique<AVLNode>(element);
+  auto newNode = std::make_unique<Utils::TreeNode>(element);
   if (isEmpty()) {
     root = std::move(newNode);
     setSize(getSize() + 1);
     return;
   }
   auto current = root.get();
-  AVLNode *parent = nullptr;
+  Utils::TreeNode *parent = nullptr;
   while (current != nullptr) {
     parent = current;
     if (newNode->element < current->element) {
@@ -32,10 +32,10 @@ void AVLTree::insert(Element element) {
   updateBalanceUp(parent);
 }
 
-void AVLTree::deleteNode(AVLNode *node) {
+void AVLTree::deleteNode(Utils::TreeNode *node) {
   if (node == nullptr) return;
 
-  AVLNode *parent = node->parent;
+  Utils::TreeNode *parent = node->parent;
 
   if (node->left == nullptr && node->right == nullptr) {
     if (node == root.get()) {
@@ -50,7 +50,7 @@ void AVLTree::deleteNode(AVLNode *node) {
   }
 
   else if (node->left == nullptr || node->right == nullptr) {
-    std::unique_ptr<AVLNode> &child = (node->left) ? node->left : node->right;
+    std::unique_ptr<Utils::TreeNode> &child = (node->left) ? node->left : node->right;
     if (node == root.get()) {
       root = std::move(child);
       root->parent = nullptr;
@@ -65,7 +65,7 @@ void AVLTree::deleteNode(AVLNode *node) {
   }
 
   else {
-    AVLNode *successor = node->right.get();
+    Utils::TreeNode *successor = node->right.get();
     while (successor->left) successor = successor->left.get();
     node->element = successor->element;
     deleteNode(successor);
@@ -94,8 +94,8 @@ bool AVLTree::remove(const Element element) {
   return true;
 }
 
-AVLTree::AVLNode *AVLTree::findElement(const Element &element) const {
-  AVLNode *current = root.get();
+Utils::TreeNode *AVLTree::findElement(const Element &element) const {
+  Utils::TreeNode *current = root.get();
   while (current != nullptr && current->element.getKey() != element.getKey()) {
     if (element < current->element) {
       current = current->left.get();
@@ -105,11 +105,11 @@ AVLTree::AVLNode *AVLTree::findElement(const Element &element) const {
   }
   return current;
 }
-void AVLTree::RRRotation(std::unique_ptr<AVLNode> &current) {
-  std::unique_ptr<AVLNode> currentRight = std::move(current->right);
+void AVLTree::RRRotation(std::unique_ptr<Utils::TreeNode> &current) {
+  std::unique_ptr<Utils::TreeNode> currentRight = std::move(current->right);
   const auto parent = current->parent;
-  const AVLNode *parentLeft = nullptr;
-  const AVLNode *parentRight = nullptr;
+  const Utils::TreeNode *parentLeft = nullptr;
+  const Utils::TreeNode *parentRight = nullptr;
   if (parent != nullptr) {
     if (parent->left != nullptr){
       parentLeft = parent->left.get();
@@ -140,11 +140,11 @@ void AVLTree::RRRotation(std::unique_ptr<AVLNode> &current) {
     }
   }
 }
-void AVLTree::LLRotation(std::unique_ptr<AVLNode> &current) {
-  std::unique_ptr<AVLNode> currentLeft = std::move(current->left);
+void AVLTree::LLRotation(std::unique_ptr<Utils::TreeNode> &current) {
+  std::unique_ptr<Utils::TreeNode> currentLeft = std::move(current->left);
   const auto parent = current->parent;
-  const AVLNode *parentLeft = nullptr;
-  const AVLNode *parentRight = nullptr;
+  const Utils::TreeNode *parentLeft = nullptr;
+  const Utils::TreeNode *parentRight = nullptr;
   if (parent != nullptr) {
     if (parent->left != nullptr){
       parentLeft = parent->left.get();
@@ -175,20 +175,20 @@ void AVLTree::LLRotation(std::unique_ptr<AVLNode> &current) {
     }
   }
 }
-void AVLTree::LRRotation(std::unique_ptr<AVLNode> &current) {
+void AVLTree::LRRotation(std::unique_ptr<Utils::TreeNode> &current) {
   RRRotation(current->left);
   LLRotation(current);
 }
-void AVLTree::RLRotation(std::unique_ptr<AVLNode> &current) {
+void AVLTree::RLRotation(std::unique_ptr<Utils::TreeNode> &current) {
   LLRotation(current->right);
   RRRotation(current);
 }
-int AVLTree::checkBalance(const AVLNode *current) {
+int AVLTree::checkBalance(const Utils::TreeNode *current) {
   const int leftHeight = current->left ? current->left->height : -1;
   const int rightHeight = current->right ? current->right->height : -1;
   return leftHeight - rightHeight;
 }
-void AVLTree::balance(std::unique_ptr<AVLNode> &current) {
+void AVLTree::balance(std::unique_ptr<Utils::TreeNode> &current) {
   if (!current)
     return;
 
@@ -210,12 +210,12 @@ void AVLTree::balance(std::unique_ptr<AVLNode> &current) {
   }
 }
 
-void AVLTree::updateHeight(AVLNode *node) {
+void AVLTree::updateHeight(Utils::TreeNode *node) {
   const int leftHeight = node->left ? node->left->height : -1;
   const int rightHeight = node->right ? node->right->height : -1;
   node->height = 1 + std::max(leftHeight, rightHeight);
 }
-void AVLTree::updateBalanceUp(AVLNode *node) {
+void AVLTree::updateBalanceUp(Utils::TreeNode *node) {
   while (node != nullptr) {
     updateHeight(node);
     if (std::abs(checkBalance(node)) > 1) {

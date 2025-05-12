@@ -3,40 +3,31 @@
 #include <memory>
 
 #include "Collection.hpp"
-
-#include <queue>
+#include "Utils.hpp"
 
 class AVLTree final : public Collection {
+private:
+  std::unique_ptr<Utils::TreeNode> root = nullptr;
+  void LLRotation(std::unique_ptr<Utils::TreeNode> &current);
+  void RRRotation(std::unique_ptr<Utils::TreeNode> &current);
+  void LRRotation(std::unique_ptr<Utils::TreeNode> &current);
+  void RLRotation(std::unique_ptr<Utils::TreeNode> &current);
+  static int checkBalance(const Utils::TreeNode *current);
+  void balance(std::unique_ptr<Utils::TreeNode> &current);
+  static void updateHeight(Utils::TreeNode *node);
+  void updateBalanceUp(Utils::TreeNode *node);
+  void deleteNode(Utils::TreeNode *node);
 
 public:
-  struct AVLNode{
-    Element element;
-    std::unique_ptr<AVLNode> left = nullptr;
-    std::unique_ptr<AVLNode> right = nullptr;
-    AVLNode *parent = nullptr;
-    int height = 0;
-    explicit AVLNode(Element const e) : element(e){}
-  };
   explicit AVLTree() = default;
   ~AVLTree() override = default;
   void insert(Element element) override;
-  [[nodiscard]] AVLNode* findElement(const Element &element) const;
-  [[nodiscard]] AVLNode* getRoot() const {
+  [[nodiscard]] Utils::TreeNode* findElement(const Element &element) const;
+  [[nodiscard]] Utils::TreeNode* getRoot() const {
     return root.get();
   }
   bool remove(Element element) override;
   bool findAndReplace(Element element) override;
-private:
-  std::unique_ptr<AVLNode> root = nullptr;
-  void LLRotation(std::unique_ptr<AVLNode> &current);
-  void RRRotation(std::unique_ptr<AVLNode> &current);
-  void LRRotation(std::unique_ptr<AVLNode> &current);
-  void RLRotation(std::unique_ptr<AVLNode> &current);
-  static int checkBalance(const AVLNode *current);
-  void balance(std::unique_ptr<AVLNode> &current);
-  static void updateHeight(AVLNode *node);
-  void updateBalanceUp(AVLNode *node);
-  void deleteNode(AVLNode *node);
 };
 
 #endif // AVLTree_HPP
