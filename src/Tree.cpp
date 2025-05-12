@@ -64,3 +64,13 @@ Utils::TreeNode *Tree::removeNodeWithoutChildren(
   setSize(getSize() - 1);
   return parent;
 }
+Utils::TreeNode *Tree::removeNodeWithOneChild(
+    const Utils::TreeNode *node, std::unique_ptr<Utils::TreeNode> &child) {
+  Utils::TreeNode *parent = node->parent;
+  child->parent = parent;
+  if (parent->left.get() == node)
+    parent->left = std::move(child);
+  else
+    parent->right = std::move(child);
+  return parent;
+}

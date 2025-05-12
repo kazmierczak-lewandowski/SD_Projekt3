@@ -12,22 +12,16 @@ void BSTree::insert(Element element) {
   Tree::insert(element, parent);
 }
 void BSTree::deleteNode(Utils::TreeNode *node) {
-  Utils::TreeNode *parent = node->parent;
   if (node->left == nullptr && node->right == nullptr) {
     removeNodeWithoutChildren(node);
-  }
-  else if (node->left == nullptr || node->right == nullptr) {
+  } else if (node->left == nullptr || node->right == nullptr) {
     std::unique_ptr<Utils::TreeNode> &child =
         (node->left) ? node->left : node->right;
     if (node == getRoot()) {
       root = std::move(child);
       getRoot()->parent = nullptr;
     } else {
-      child->parent = parent;
-      if (parent->left.get() == node)
-        parent->left = std::move(child);
-      else
-        parent->right = std::move(child);
+      removeNodeWithOneChild(node, child);
     }
     setSize(getSize() - 1);
   }

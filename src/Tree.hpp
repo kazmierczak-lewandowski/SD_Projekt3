@@ -11,6 +11,8 @@ class Tree : public Collection {
   bool remove(Element element) override;
   bool findAndReplace(Element element) override;
   Utils::TreeNode* removeNodeWithoutChildren(const Utils::TreeNode* node);
+  static Utils::TreeNode* removeNodeWithOneChild(
+      const Utils::TreeNode* node, std::unique_ptr<Utils::TreeNode>& child);
   void insert(Element element, Utils::TreeNode*& parent);
   void insert(Element element) override = 0;
   [[nodiscard]] Utils::TreeNode* findElement(

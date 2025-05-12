@@ -19,20 +19,13 @@ void AVLTree::deleteNode(Utils::TreeNode *node) {
 
   if (node->left == nullptr && node->right == nullptr) {
     parent = removeNodeWithoutChildren(node);
-  }
-
-  else if (node->left == nullptr || node->right == nullptr) {
-    std::unique_ptr<Utils::TreeNode> &child =
-        (node->left) ? node->left : node->right;
+  } else if (node->left == nullptr || node->right == nullptr) {
+    auto &child = node->left ? node->left : node->right;
     if (node == getRoot()) {
       root = std::move(child);
       root->parent = nullptr;
     } else {
-      child->parent = parent;
-      if (parent->left.get() == node)
-        parent->left = std::move(child);
-      else
-        parent->right = std::move(child);
+      parent = removeNodeWithOneChild(node, child);
     }
     setSize(getSize() - 1);
   }
@@ -134,7 +127,6 @@ void AVLTree::balance(Utils::TreeNode *current) {
   if (!current) return;
 
   updateHeight(current);
-
   if (const int balance_factor = checkBalance(current); balance_factor > 1) {
     if (checkBalance(current->left.get()) >= 0) {
       if (current == getRoot()) {
