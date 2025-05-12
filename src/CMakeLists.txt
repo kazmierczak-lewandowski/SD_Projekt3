@@ -8,6 +8,8 @@ add_library(StructuresLib STATIC
         Collection.hpp
         DoublyLinkedList.cpp
         DoublyLinkedList.hpp
+        BSTree.cpp
+        BSTree.hpp
 )
 target_include_directories(StructuresLib
         PUBLIC
