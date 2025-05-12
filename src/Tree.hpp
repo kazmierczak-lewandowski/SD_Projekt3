@@ -14,7 +14,7 @@ class Tree : public Collection {
   static Utils::TreeNode* removeNodeWithOneChild(
       const Utils::TreeNode* node, std::unique_ptr<Utils::TreeNode>& child);
   void insert(Element element, Utils::TreeNode*& parent);
-  void insert(Element element) override = 0;
+  virtual void insert(Element element) = 0;
   [[nodiscard]] Utils::TreeNode* findElement(
       const Element &element) const;
   [[nodiscard]] virtual Utils::TreeNode* getRoot() const = 0;

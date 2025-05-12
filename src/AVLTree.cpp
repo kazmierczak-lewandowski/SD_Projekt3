@@ -127,41 +127,25 @@ void AVLTree::balance(Utils::TreeNode *current) {
   if (!current) return;
 
   updateHeight(current);
+  std::unique_ptr<Utils::TreeNode> *node = nullptr;
+  if (current == root.get()) {
+    node = &root;
+  } else if (current->parent->left.get() == current) {
+    node = &current->parent->left;
+  } else {
+    node = &current->parent->right;
+  }
   if (const int balance_factor = checkBalance(current); balance_factor > 1) {
     if (checkBalance(current->left.get()) >= 0) {
-      if (current == getRoot()) {
-        LLRotation(root);
-      } else if (current->parent->left.get() == current) {
-        LLRotation(current->parent->left);
-      } else {
-        LLRotation(current->parent->right);
-      }
+      LLRotation(*node);
     } else {
-      if (current == getRoot()) {
-        LRRotation(root);
-      } else if (current->parent->left.get() == current) {
-        LRRotation(current->parent->left);
-      } else {
-        LRRotation(current->parent->right);
-      }
+      LRRotation(*node);
     }
   } else if (balance_factor < -1) {
     if (checkBalance(current->right.get()) <= 0) {
-      if (current == getRoot()) {
-        RRRotation(root);
-      } else if (current->parent->left.get() == current) {
-        RRRotation(current->parent->left);
-      } else {
-        RRRotation(current->parent->right);
-      }
+      RRRotation(*node);
     } else {
-      if (current == getRoot()) {
-        RLRotation(root);
-      } else if (current->parent->left.get() == current) {
-        RLRotation(current->parent->left);
-      } else {
-        RLRotation(current->parent->right);
-      }
+      RLRotation(*node);
     }
   }
 }
