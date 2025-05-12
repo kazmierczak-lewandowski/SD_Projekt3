@@ -1,18 +1,21 @@
 #include <gtest/gtest.h>
+
 #include "../src/Avl.hpp"
 #include "../src/Element.hpp"
-bool isCorrect(const AVLTree::AVLNode *node) { // NOLINT(*-no-recursion)
+bool isCorrect(const AVLTree::AVLNode *node) {  // NOLINT(*-no-recursion)
   if (node == nullptr) return true;
-  if (node->left) {
-    if (node->left->element > node->element || node->left->parent != node) return false;
+  if (node->left &&
+      (node->left->element > node->element || node->left->parent != node)) {
+    return false;
   }
-  if (node->right) {
-    if (node->right->element < node->element || node->right->parent != node) return false;
+  if (node->right &&
+      (node->right->element < node->element || node->right->parent != node)) {
+    return false;
   }
   return isCorrect(node->left.get()) && isCorrect(node->right.get());
 }
 
-bool isBalanced(const AVLTree::AVLNode *node) { // NOLINT(*-no-recursion)
+bool isBalanced(const AVLTree::AVLNode *node) {  // NOLINT(*-no-recursion)
   if (node == nullptr) return true;
 
   const int leftHeight = node->left ? node->left->height : -1;
@@ -34,7 +37,7 @@ class AvlTest : public testing::Test {
     tree.insert(Element{3, 30});
     tree.insert(Element{4, 40});
   }
-  AVLTree* getTree() { return &tree; }
+  AVLTree *getTree() { return &tree; }
 };
 
 TEST_F(AvlTest, InsertElementIntoEmptyTree) {
