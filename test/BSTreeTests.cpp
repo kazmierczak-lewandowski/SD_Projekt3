@@ -2,9 +2,13 @@
 #include <gtest/gtest.h>
 
 class BSTreeTest : public ::testing::Test {
-protected:
+private:
   BSTree tree;
-
+  
+protected:
+  BSTree* getTree() {
+    return &tree;
+  }
   void SetUp() override {
     tree.insert(Element(10, 10));
     tree.insert(Element(5, 5));
@@ -13,34 +17,34 @@ protected:
 };
 
 TEST_F(BSTreeTest, FindExistingElement) {
-  EXPECT_NE(tree.findElement(Element(10, 10)), nullptr);
+  EXPECT_NE(getTree()->findElement(Element(10, 10)), nullptr);
 }
 
 TEST_F(BSTreeTest, FindNonExistentElement) {
-  EXPECT_EQ(tree.findElement(Element(20, 30)), nullptr);
+  EXPECT_EQ(getTree()->findElement(Element(20, 30)), nullptr);
 }
 
 TEST_F(BSTreeTest, RemoveExistingElement) {
-  EXPECT_TRUE(tree.remove(Element(10, 10)));
-  EXPECT_EQ(tree.getSize(), 2);
-  EXPECT_EQ(tree.findElement(Element(10, 10)), nullptr);
+  EXPECT_TRUE(getTree()->remove(Element(10, 10)));
+  EXPECT_EQ(getTree()->getSize(), 2);
+  EXPECT_EQ(getTree()->findElement(Element(10, 10)), nullptr);
 }
 
 TEST_F(BSTreeTest, RemoveNonExistentElement) {
-  EXPECT_FALSE(tree.remove(Element(20, 20)));
-  EXPECT_EQ(tree.getSize(), 3);
+  EXPECT_FALSE(getTree()->remove(Element(20, 20)));
+  EXPECT_EQ(getTree()->getSize(), 3);
 }
 
 TEST_F(BSTreeTest, ReplaceExistingElement) {
-  EXPECT_TRUE(tree.findAndReplace(Element(10, 30)));
-  EXPECT_EQ(tree.getSize(), 3);
-  EXPECT_NE(tree.findElement(Element(10, 30)), nullptr);
-  EXPECT_EQ(tree.findElement(Element(10, 30))->element.getValue(), 30);
+  EXPECT_TRUE(getTree()->findAndReplace(Element(10, 30)));
+  EXPECT_EQ(getTree()->getSize(), 3);
+  EXPECT_NE(getTree()->findElement(Element(10, 30)), nullptr);
+  EXPECT_EQ(getTree()->findElement(Element(10, 30))->element.getValue(), 30);
 }
 
 TEST_F(BSTreeTest, ReplaceNonExistentElement) {
-  EXPECT_FALSE(tree.findAndReplace(Element(20, 30)));
-  EXPECT_EQ(tree.getSize(), 3);
+  EXPECT_FALSE(getTree()->findAndReplace(Element(20, 30)));
+  EXPECT_EQ(getTree()->getSize(), 3);
 }
 TEST_F(BSTreeTest, RemoveFromEmptyTree) {
   BSTree emptyTree;
@@ -72,8 +76,8 @@ TEST_F(BSTreeTest, RemoveRootWithRightChild) {
   EXPECT_EQ(twoElementTree.findElement(Element(10, 10)), nullptr);
 }
 TEST_F(BSTreeTest, RemoveNodeWithOneChild) {
-  tree.insert(Element(1, 1));
-  EXPECT_TRUE(tree.remove(Element(5, 5)));
-  EXPECT_EQ(tree.getSize(), 3);
-  EXPECT_EQ(tree.findElement(Element(5, 5)), nullptr);
+  getTree()->insert(Element(1, 1));
+  EXPECT_TRUE(getTree()->remove(Element(5, 5)));
+  EXPECT_EQ(getTree()->getSize(), 3);
+  EXPECT_EQ(getTree()->findElement(Element(5, 5)), nullptr);
 }
