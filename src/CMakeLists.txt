@@ -12,6 +12,8 @@ add_library(StructuresLib STATIC
         DoublyLinkedList.hpp
         BSTree.cpp
         BSTree.hpp
+        Tree.cpp
+        Tree.hpp
 )
 target_include_directories(StructuresLib
         PUBLIC
