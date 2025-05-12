@@ -74,12 +74,12 @@ void AVLTree::deleteNode(AVLNode *node) {
 
   updateBalanceUp(parent);
 }
-bool AVLTree::findAndReplace(Element element) {
+bool AVLTree::findAndReplace(const Element element) {
   const auto node = findElement(element);
   if (node == nullptr) {
     return false;
   }
-  auto newElement = Element(element.getKey(),element.getValue());
+  const auto newElement = Element(element.getKey(),element.getValue());
   deleteNode(node);
   insert(newElement);
   return true;

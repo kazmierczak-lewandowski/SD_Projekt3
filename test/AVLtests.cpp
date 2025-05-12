@@ -166,3 +166,23 @@ TEST(AVLTreeTests, LLRotationParentRight) {
   EXPECT_TRUE(isCorrect(avl.getRoot()));
   EXPECT_TRUE(isBalanced(avl.getRoot()));
 }
+TEST(AVLTreeTests, LRRotation) {
+  AVLTree avl;
+  avl.insert(Element{10, 1});
+  avl.insert(Element{12, 2});
+  avl.insert(Element{9, 3});
+  avl.insert(Element{7, 4});
+  avl.insert(Element{8, 5});
+  EXPECT_TRUE(isCorrect(avl.getRoot()));
+  EXPECT_TRUE(isBalanced(avl.getRoot()));
+}
+TEST(AVLTreeTests, RLRotation) {
+  AVLTree avl;
+  avl.insert(Element{11, 1});
+  avl.insert(Element{12, 2});
+  avl.insert(Element{8, 3});
+  avl.insert(Element{10, 4});
+  avl.insert(Element{9, 5});
+  EXPECT_TRUE(isCorrect(avl.getRoot()));
+  EXPECT_TRUE(isBalanced(avl.getRoot()));
+}
