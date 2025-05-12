@@ -6,6 +6,8 @@ add_library(StructuresLib STATIC
         Utils.hpp
         Collection.cpp
         Collection.hpp
+        Avl.cpp
+        Avl.hpp
         DoublyLinkedList.cpp
         DoublyLinkedList.hpp
 )
