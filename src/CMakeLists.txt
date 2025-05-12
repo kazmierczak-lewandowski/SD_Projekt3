@@ -6,8 +6,8 @@ add_library(StructuresLib STATIC
         Utils.hpp
         Collection.cpp
         Collection.hpp
-        Avl.cpp
-        Avl.hpp
+        AVLTree.cpp
+        AVLTree.hpp
         DoublyLinkedList.cpp
         DoublyLinkedList.hpp
         BSTree.cpp

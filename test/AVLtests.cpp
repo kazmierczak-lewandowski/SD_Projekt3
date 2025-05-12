@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "../src/Avl.hpp"
+#include "../src/AVLTree.hpp"
 #include "../src/Element.hpp"
 bool isCorrect(const Utils::TreeNode *node) {  // NOLINT(*-no-recursion)
   if (node == nullptr) return true;
