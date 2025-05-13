@@ -15,9 +15,7 @@ class BSTree final : public Tree {
 
  public:
   void add(Element element) override;
-  [[nodiscard]] Utils::TreeNode* getRoot() const override {
-    return root.get();
-  };
+  [[nodiscard]] Utils::TreeNode* getRoot() const override { return root.get(); }
 };
 
 #endif  // BSTREE_HPP

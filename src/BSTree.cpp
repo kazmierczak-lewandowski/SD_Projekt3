@@ -1,5 +1,7 @@
 #include "BSTree.hpp"
 
+#include <functional>
+
 #include "Utils.hpp"
 void BSTree::add(Element element) {
   if (isEmpty()) {

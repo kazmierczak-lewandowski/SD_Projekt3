@@ -22,9 +22,8 @@ class DoublyLinkedList final : public Collection {
   [[nodiscard]] Node *getHead() const {
     return head.get();
   }
-  [[nodiscard]] Node *getTail() const {
-    return tail;
-  }
+  [[nodiscard]] Node *getTail() const { return tail; }
+  std::vector<Element> getAllElements() override;
 };
 
 #endif  // DOUBLYLINKEDLIST_HPP

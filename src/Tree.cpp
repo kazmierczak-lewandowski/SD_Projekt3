@@ -1,4 +1,6 @@
 #include "Tree.hpp"
+
+#include <functional>
 void Tree::insert(Element element, Utils::TreeNode*& parent) {
   auto newNode = std::make_unique<Utils::TreeNode>(element);
   auto current = getRoot();
@@ -73,4 +75,15 @@ Utils::TreeNode *Tree::removeNodeWithOneChild(
   else
     parent->right = std::move(child);
   return parent;
+}
+std::vector<Element> Tree::getAllElements() {
+  std::vector<Element> elements;
+  std::function<void(const Utils::TreeNode *)> inorder = [&](const Utils::TreeNode* node) {
+    if (!node) return;
+    inorder(node->left.get());
+    elements.push_back(node->element);
+    inorder(node->right.get());
+  };
+  inorder(getRoot());
+  return elements;
 }

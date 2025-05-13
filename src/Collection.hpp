@@ -1,7 +1,7 @@
 #ifndef COLLECTION_HPP
 #define COLLECTION_HPP
 #include "Element.hpp"
-
+#include <vector>
 class Collection {
  private:
   int size = 0;
@@ -16,6 +16,7 @@ class Collection {
   virtual bool findAndReplace(Element element) = 0;
   [[nodiscard]] int getSize() const { return size; }
   [[nodiscard]] bool isEmpty() const { return size == 0; }
+  virtual std::vector<Element> getAllElements() = 0;
 };
 
 #endif  // COLLECTION_HPP

@@ -81,3 +81,11 @@ TEST_F(BSTreeTest, RemoveNodeWithOneChild) {
   EXPECT_EQ(getTree()->getSize(), 3);
   EXPECT_EQ(getTree()->findElement(Element(5, 5)), nullptr);
 }
+TEST_F(BSTreeTest, FindAll) {
+  const auto tree = getTree();
+  const auto elements = tree->getAllElements();
+  ASSERT_EQ(elements.size(), 3);
+  EXPECT_EQ(elements[0], Element(5, 5));
+  EXPECT_EQ(elements[1], Element(10, 10));
+  EXPECT_EQ(elements[2], Element(15, 15));
+}

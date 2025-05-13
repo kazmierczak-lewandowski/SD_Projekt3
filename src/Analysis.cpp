@@ -57,7 +57,7 @@ void Analysis::prepareToTest(const int size, const int iteration,
 std::map<int, long> Analysis::analyzeInsert(const BucketType bucketType) {
   clear();
   std::map<int, long> result;
-  printTestHeader(bucketType, "Modify key");
+  printTestHeader(bucketType, "Insert");
   for (int i = 100'000; i <= 5'000'000; i += 100'000) {
     long average = 0;
     for (int j = 0; j < ITERATIONS; j++) {
@@ -75,7 +75,24 @@ std::map<int, long> Analysis::analyzeInsert(const BucketType bucketType) {
   return result;
 }
 std::map<int, long> Analysis::analyzeRemove(const BucketType bucketType) {
-  HashMap map(bucketType);
+  clear();
+  std::map<int, long> result;
+  printTestHeader(bucketType, "Remove");
+  for (int i = 100'000; i <= 5'000'000; i += 100'000) {
+    long average = 0;
+    for (int j = 0; j < ITERATIONS; j++) {
+      HashMap map(bucketType);
+      prepareToTest(i, j, map);
+      const auto start = std::chrono::high_resolution_clock::now();
+      map.remove({5'000'000, 5'000'000});
+      const auto end = std::chrono::high_resolution_clock::now();
+      average +=
+          std::chrono::duration_cast<std::chrono::nanoseconds>(end - start)
+              .count();
+    }
+    result.insert(std::pair(i, average / ITERATIONS));
+  }
+  return result;
 }
 void Analysis::analysis() {
   using enum BucketType;

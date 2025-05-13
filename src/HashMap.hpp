@@ -27,7 +27,8 @@ class HashMap {
     return table[index]->getSize();
   }
   static void fillFromFile(HashMap &map, const std::string &filename,
-                           const int size);
+                           int size);
+  Element getRandomElement();
 };
 
 #endif  // HASHMAP_HPP

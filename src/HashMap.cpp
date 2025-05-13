@@ -69,3 +69,9 @@ void HashMap::fillFromFile(HashMap& map, const std::string& filename,
   }
   ifs.close();
 }
+Element HashMap::getRandomElement() {
+  std::vector<Element> elements;
+  for (int i = 0; i < CAPACITY; ++i) {
+
+  }
+}
