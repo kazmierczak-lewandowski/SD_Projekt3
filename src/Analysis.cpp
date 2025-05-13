@@ -56,7 +56,7 @@ std::map<int, long> Analysis::analyzeInsert(const BucketType bucketType) {
   clear();
   std::map<int, long> result;
   printTestHeader(bucketType, "Insert");
-  for (int i = 100'000; i <= 3'000'000; i += 100'000) {
+  for (int i = START; i <= STOP; i += 100'000) {
     long average = 0;
     for (int j = 0; j < ITERATIONS; j++) {
       HashMap map(bucketType);
@@ -76,7 +76,7 @@ std::map<int, long> Analysis::analyzeRemove(const BucketType bucketType) {
   clear();
   std::map<int, long> result;
   printTestHeader(bucketType, "Remove");
-  for (int i = 100'000; i <= 3'000'000; i += 100'000) {
+  for (int i = START; i <= STOP; i += 100'000) {
     long average = 0;
     for (int j = 0; j < ITERATIONS; j++) {
       HashMap map(bucketType);
