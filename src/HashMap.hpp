@@ -26,9 +26,11 @@ class HashMap {
   [[nodiscard]] int getBucketSize(const int index) const {
     return table[index]->getSize();
   }
-  static void fillFromFile(HashMap &map, const std::string &filename,
-                           int size);
-  Element getRandomElement();
+  void print() const;
+  static void fillWithRandom(const std::unique_ptr<HashMap>::element_type& collection, int size);
+  static void fillFromFile(HashMap &map, const std::string &filename, int size);
+  [[nodiscard]] std::vector<Element> getAllElements() const;
+  [[nodiscard]] Element getRandomElement() const;
 };
 
 #endif  // HASHMAP_HPP
