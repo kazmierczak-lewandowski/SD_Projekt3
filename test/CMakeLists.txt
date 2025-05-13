@@ -5,6 +5,7 @@ add_executable(Tests
         DLLTests.cpp
         AVLtests.cpp
         BSTreeTests.cpp
+        HashMapTests.cpp
 )
 include_directories(${GTEST_INCLUDE_DIRS})
 target_link_libraries(Tests
