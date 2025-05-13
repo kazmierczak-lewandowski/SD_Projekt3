@@ -34,19 +34,38 @@ void HashMap::insert(const Element element) {
   const int hashAlt = HashMap::hashAlt(element.getKey());
   const int hashBase = HashMap::hashBase(element.getKey());
 
-  if (table[hashBase]->findAndReplace(element) ||
-      table[hashAlt]->findAndReplace(element)) {
+  const std::unique_ptr<Collection>& tableBase = table[hashBase];
+  const std::unique_ptr<Collection>& tableAlt = table[hashAlt];
+
+  if (tableBase->findAndReplace(element) ||
+      tableAlt->findAndReplace(element)) {
     return;
   }
-  if (table[hashBase]->getSize() < table[hashAlt]->getSize()) {
-    table[hashBase]->insert(element);
+  if (tableBase->getSize() <= tableAlt->getSize()) {
+    tableBase->insert(element);
     return;
   }
-  table[hashAlt]->insert(element);
+  tableAlt->insert(element);
 }
-void HashMap::remove(const Element element) {
+bool HashMap::remove(const Element element) {
   if (table[hashBase(element.getKey())]->remove(element)) {
-    return;
+    return true;
   }
-  table[hashAlt(element.getKey())]->remove(element);
+  return table[hashAlt(element.getKey())]->remove(element);
+}
+void HashMap::fillFromFile(HashMap& map, const std::string& filename,
+                           const int size) {
+  std::ifstream ifs(filename);
+  int number;
+  int priority;
+  int i = 0;
+  while (ifs >> number && ifs >> priority) {
+    if (i > size) {
+      break;
+    }
+    const auto element = Element(number, priority);
+    map.insert(element);
+    i++;
+  }
+  ifs.close();
 }
