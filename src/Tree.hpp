@@ -14,7 +14,7 @@ class Tree : public Collection {
   Utils::TreeNode* removeNodeWithoutChildren(const Utils::TreeNode* node);
   static Utils::TreeNode* removeNodeWithOneChild(
       const Utils::TreeNode* node, std::unique_ptr<Utils::TreeNode>& child);
-  std::vector<Element> getAllElements();
+  std::vector<Element> getAllElements() override;
   void insert(Element element, Utils::TreeNode*& parent);
   void insert(const Element element) override { add(element); };
   virtual void add(Element element) = 0;
