@@ -63,9 +63,7 @@ void HashMap::print() const {
   }
 }
 void HashMap::fillWithRandom(
-    const std::unique_ptr<HashMap>::element_type& collection, int size) {
-
-}
+    const std::unique_ptr<HashMap>::element_type& collection, int size) {}
 void HashMap::fillFromFile(HashMap& map, const std::string& filename,
                            const int size) {
   std::ifstream ifs(filename);

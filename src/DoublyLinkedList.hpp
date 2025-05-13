@@ -19,9 +19,7 @@ class DoublyLinkedList final : public Collection {
   void insert(Element element) override;
   bool remove(Element element) override;
   bool findAndReplace(Element element) override;
-  [[nodiscard]] Node *getHead() const {
-    return head.get();
-  }
+  [[nodiscard]] Node *getHead() const { return head.get(); }
   [[nodiscard]] Node *getTail() const { return tail; }
   std::vector<Element> getAllElements() override;
 };

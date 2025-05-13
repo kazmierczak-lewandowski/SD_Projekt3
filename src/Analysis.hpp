@@ -6,7 +6,7 @@
 #include "HashMap.hpp"
 class Analysis {
  private:
-  static constexpr int ITERATIONS = 10;
+  static constexpr int ITERATIONS = 30;
   static void printSubTest(int size, int iteration);
   static void printTestHeader(BucketType type, std::string title);
   static void writeToFile(const std::string& filename,
@@ -14,6 +14,7 @@ class Analysis {
   static void prepareToTest(int size, int iteration, HashMap& map);
   static std::map<int, long> analyzeInsert(BucketType bucketType);
   static std::map<int, long> analyzeRemove(BucketType bucketType);
+
  public:
   static void analysis();
 };

@@ -1,7 +1,8 @@
 #ifndef COLLECTION_HPP
 #define COLLECTION_HPP
-#include "Element.hpp"
 #include <vector>
+
+#include "Element.hpp"
 class Collection {
  private:
   int size = 0;

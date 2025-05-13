@@ -14,13 +14,11 @@ void menuLoop(const std::vector<std::string> &choices, int &highlight) {
 
     switch (choice) {
       case KEY_UP: {
-        if (highlight != 0)
-          highlight--;
+        if (highlight != 0) highlight--;
         break;
       }
       case KEY_DOWN: {
-        if (highlight != choices.size() - 1)
-          highlight++;
+        if (highlight != choices.size() - 1) highlight++;
         break;
       }
       default:
@@ -48,7 +46,8 @@ int main() {
   keypad(stdscr, true);
   curs_set(0);
   std::unique_ptr<HashMap> collection;
-  std::vector<std::string> CHOICES{"1. BST", "2. AVLTree", "3. DoublyLinkedList", "4. Analiza", "5. Wyjdz"};
+  std::vector<std::string> CHOICES{
+      "1. BST", "2. AVLTree", "3. DoublyLinkedList", "4. Analiza", "5. Wyjdz"};
   int highlight = 0;
   menuLoop(CHOICES, highlight);
   switch (highlight) {
@@ -74,21 +73,20 @@ int main() {
       return 0;
     }
   }
-  CHOICES = {
-    "1. Dane z pliku numbers.txt",
-    "2. Losowe dane",
-    "3. Wypisz",
-    "4. Wstaw",
-    "5. Usun",
-    "6. Wyjdz"
-  };
+  CHOICES = {"1. Dane z pliku numbers.txt",
+             "2. Losowe dane",
+             "3. Wypisz",
+             "4. Wstaw",
+             "5. Usun",
+             "6. Wyjdz"};
   do {
     highlight = 0;
     clear();
     menuLoop(CHOICES, highlight);
     switch (highlight) {
       case 0: {
-        HashMap::fillFromFile(*collection, "numbers.txt", getInput("Podaj rozmiar: "));
+        HashMap::fillFromFile(*collection, "numbers.txt",
+                              getInput("Podaj rozmiar: "));
         clear();
         printw("Wypelniono danymi z pliku\n");
         getch();
@@ -116,11 +114,11 @@ int main() {
         break;
       }
       case 4: {
-        const Element element(getInput("Podaj klucz do usuniecia: "),
-                              -1);
+        const Element element(getInput("Podaj klucz do usuniecia: "), -1);
         bool res = collection->remove(element);
         clear();
-        res ? printw("Usunieto element\n") : printw("Nie znaleziono elementu\n");
+        res ? printw("Usunieto element\n")
+            : printw("Nie znaleziono elementu\n");
         getch();
         break;
       }
