@@ -93,7 +93,7 @@ int main() {
         break;
       }
       case 1: {
-        HashMap::fillWithRandom(*collection, getInput("Podaj rozmiar: "));
+        HashMap::fillWithRandom(collection, getInput("Podaj rozmiar: "));
         clear();
         printw("Wypelniono losowymi danymi\n");
         getch();
@@ -115,7 +115,7 @@ int main() {
       }
       case 4: {
         const Element element(getInput("Podaj klucz do usuniecia: "), -1);
-        bool res = collection->remove(element);
+        const bool res = collection->remove(element);
         clear();
         res ? printw("Usunieto element\n")
             : printw("Nie znaleziono elementu\n");
