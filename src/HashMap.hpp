@@ -12,7 +12,7 @@ enum class BucketType { AVL, BST, DLL };
 class HashMap {
  private:
   std::unique_ptr<std::unique_ptr<Collection>[]> table;
-  static constexpr int CAPACITY = 100'000;
+  static constexpr int CAPACITY = 10'000;
   static constexpr int A = 1'234'567;
   static constexpr int B = 987'654;
   static constexpr int P = 5'000'003;
@@ -22,7 +22,16 @@ class HashMap {
  public:
   explicit HashMap(BucketType type);
   void insert(Element element);
-  void remove(Element element);
+  bool remove(Element element);
+  [[nodiscard]] int getBucketSize(const int index) const {
+    return table[index]->getSize();
+  }
+  void print() const;
+  static void fillWithRandom(const std::unique_ptr<HashMap> &collection,
+                             int size);
+  static void fillFromFile(HashMap &map, const std::string &filename, int size);
+  [[nodiscard]] std::vector<Element> getAllElements() const;
+  [[nodiscard]] Element getRandomElement() const;
 };
 
 #endif  // HASHMAP_HPP

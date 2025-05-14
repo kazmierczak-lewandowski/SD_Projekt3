@@ -130,7 +130,15 @@ TEST_F(DoublyLinkedListTest, FindAndReplaceUpdatesCorrectNode) {
   }
   EXPECT_TRUE(found);
 }
-
+TEST_F(DoublyLinkedListTest, FindAll) {
+  const auto list = getList();
+  const auto elements = list->getAllElements();
+  ASSERT_EQ(elements.size(), 4);
+  EXPECT_EQ(elements[0], Element(1, 10));
+  EXPECT_EQ(elements[1], Element(2, 20));
+  EXPECT_EQ(elements[2], Element(3, 30));
+  EXPECT_EQ(elements[3], Element(4, 40));
+}
 TEST(DoublyLinkedListStandaloneTest, FindAndReplaceOnEmptyList) {
   DoublyLinkedList emptyList;
   EXPECT_FALSE(emptyList.findAndReplace(Element{1, 100}));

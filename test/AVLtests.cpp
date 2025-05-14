@@ -112,6 +112,15 @@ TEST_F(AvlTest, FindAndReplaceNonExistentElement) {
   EXPECT_FALSE(tree->findAndReplace(nonExistent));
   EXPECT_EQ(tree->getSize(), 4);
 }
+TEST_F(AvlTest, FindAll) {
+  const auto tree = getTree();
+  const auto elements = tree->getAllElements();
+  ASSERT_EQ(elements.size(), 4);
+  EXPECT_EQ(elements[0], Element(1, 10));
+  EXPECT_EQ(elements[1], Element(2, 20));
+  EXPECT_EQ(elements[2], Element(3, 30));
+  EXPECT_EQ(elements[3], Element(4, 40));
+}
 TEST(AVLTreeTests, RRRotationParentRight) {
   AVLTree avl;
   avl.insert(Element{5, 1});

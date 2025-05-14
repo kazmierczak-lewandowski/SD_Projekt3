@@ -72,8 +72,17 @@ bool DoublyLinkedList::remove(const Element element) {
   return true;
 }
 bool DoublyLinkedList::findAndReplace(const Element element) {
-        Node *current = find(element);
-        if (current == nullptr) return false;
-        current->data = element;
-        return true;
+  Node *current = find(element);
+  if (current == nullptr) return false;
+  current->data = element;
+  return true;
+}
+std::vector<Element> DoublyLinkedList::getAllElements() {
+  std::vector<Element> result;
+  const Node *current = head.get();
+  while (current != nullptr) {
+    result.push_back(current->data);
+    current = current->next.get();
+  }
+  return result;
 }

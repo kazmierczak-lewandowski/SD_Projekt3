@@ -15,7 +15,9 @@ class Element {
   }
   Element() : key(-1), value(-1) {}
   auto operator<=>(const Element &other) const { return key <=> other.key; }
-  bool operator==(const Element &other) const { return value == other.value && key == other.key; }
+  bool operator==(const Element &other) const {
+    return value == other.value && key == other.key;
+  }
   void setValue(const int newValue) { this->value = newValue; }
   [[nodiscard]] int getKey() const { return key; }
   [[nodiscard]] int getValue() const { return value; }

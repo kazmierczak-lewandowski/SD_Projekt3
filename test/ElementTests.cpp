@@ -1,28 +1,24 @@
 #include "../src/Element.hpp"
 #include <gtest/gtest.h>
 
-// Test default constructor
 TEST(ElementTests, DefaultConstructor) {
   const Element e;
   EXPECT_EQ(e.getKey(), -1);
   EXPECT_EQ(e.getValue(), -1);
 }
 
-// Test parameterized constructor
 TEST(ElementTests, ParameterizedConstructor) {
   const Element e(10, 20);
   EXPECT_EQ(e.getKey(), 10);
   EXPECT_EQ(e.getValue(), 20);
 }
 
-// Test setValue and getValue
 TEST(ElementTests, SetValue) {
   Element e(10, 20);
   e.setValue(30);
   EXPECT_EQ(e.getValue(), 30);
 }
 
-// Test operator==
 TEST(ElementTests, EqualityOperator) {
   const Element e1(20, 20);
   const Element e2(20, 20);
@@ -31,7 +27,6 @@ TEST(ElementTests, EqualityOperator) {
   EXPECT_FALSE(e1 == e3);
 }
 
-// Test operator<=>
 TEST(ElementTests, ThreeWayComparison) {
   const Element e1(20, 20);
   const Element e2(10, 30);
@@ -41,7 +36,6 @@ TEST(ElementTests, ThreeWayComparison) {
   EXPECT_TRUE(e1 == e3);
 }
 
-// Test checkKey with another Element
 TEST(ElementTests, CheckKeyWithElement) {
   const Element e1(10, 20);
   const Element e2(10, 30);
@@ -50,20 +44,17 @@ TEST(ElementTests, CheckKeyWithElement) {
   EXPECT_FALSE(e1.checkKey(e3));
 }
 
-// Test checkKey with an integer key
 TEST(ElementTests, CheckKeyWithInt) {
   const Element e(10, 20);
   EXPECT_TRUE(e.checkKey(10));
   EXPECT_FALSE(e.checkKey(15));
 }
 
-// Test toString
 TEST(ElementTests, ToString) {
   const Element e(10, 20);
   EXPECT_EQ(e.toString(), "(20;10)");
 }
 
-// Test stream operator<<
 TEST(ElementTests, StreamOperator) {
   const Element e(10, 20);
   std::ostringstream os;
