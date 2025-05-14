@@ -93,7 +93,7 @@ int main() {
         break;
       }
       case 1: {
-        HashMap::fillWithRandom(*collection, getInput("Podaj rozmiar: "));
+        HashMap::fillWithRandom(collection, getInput("Podaj rozmiar: "));
         clear();
         printw("Wypelniono losowymi danymi\n");
         getch();
