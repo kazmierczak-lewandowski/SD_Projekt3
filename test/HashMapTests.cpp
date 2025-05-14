@@ -13,22 +13,22 @@ class HashMapTest : public testing::TestWithParam<BucketType> {
 INSTANTIATE_TEST_SUITE_P(AllBucketTypes, HashMapTest,
                          ::testing::Values(BucketType::AVL, BucketType::BST,
                                            BucketType::DLL));
+
+TEST_P(HashMapTest, InsertAndRemove) {
+  const auto map = getMap();
+  const Element e1(1, 100);
+  map->insert(e1);
+  EXPECT_TRUE(map->remove(e1));
+  EXPECT_FALSE(map->remove(e1));
+}
 TEST_P(HashMapTest, AddMaxKey) {
   constexpr int key = 5'000'000;
   constexpr int value = 1;
   const Element e(key, value);
   getMap()->insert(e);
 }
-TEST_P(HashMapTest, InsertAndRemove) {
-  auto map = getMap();
-  const Element e1(1, 100);
-  map->insert(e1);
-  EXPECT_TRUE(map->remove(e1));
-  EXPECT_FALSE(map->remove(e1));
-}
-
 TEST_P(HashMapTest, InsertDuplicate) {
-  auto map = getMap();
+  const auto map = getMap();
   const Element e1(1, 100);
   const Element e2(1, 200);
   constexpr int bucket = ((1'234'567 * 1 + 987'654) % 5'000'003) % 10'000;
@@ -53,7 +53,7 @@ TEST_P(HashMapTest, FillFromFileInsertsCorrectElements) {
   std::remove(filename.c_str());
 }
 TEST_P(HashMapTest, GetRandomElement) {
-  auto map = getMap();
+  const auto map = getMap();
   const Element e1(1, 100);
   const Element e2(1, 200);
   map->insert(e1);

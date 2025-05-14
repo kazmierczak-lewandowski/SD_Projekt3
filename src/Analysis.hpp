@@ -6,9 +6,9 @@
 #include "HashMap.hpp"
 class Analysis {
  private:
-  static constexpr int ITERATIONS = 30;
+  static constexpr int ITERATIONS = 20;
   static constexpr int START = 100'000;
-  static constexpr int STOP = 3'000'000;
+  static constexpr int STOP = 4'000'000;
   static void printSubTest(int size, int iteration);
   static void printTestHeader(BucketType type, std::string title);
   static void writeToFile(const std::string& filename,

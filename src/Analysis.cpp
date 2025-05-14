@@ -95,8 +95,7 @@ std::map<int, long> Analysis::analyzeRemove(const BucketType bucketType) {
 }
 void Analysis::analysis() {
   using enum BucketType;
-  std::map<int, long> data;
-  data = analyzeInsert(BST);
+  std::map<int, long> data = analyzeInsert(BST);
   writeToFile("InsertionBST.csv", data);
   data = analyzeRemove(BST);
   writeToFile("RemoveBST.csv", data);
