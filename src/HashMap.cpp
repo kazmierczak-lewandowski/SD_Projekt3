@@ -63,7 +63,18 @@ void HashMap::print() const {
   }
 }
 void HashMap::fillWithRandom(
-    const std::unique_ptr<HashMap>::element_type& collection, int size) {}
+    const std::unique_ptr<HashMap>& collection,
+                             const int size) {
+  std::vector<int> numbersLeft;
+  for (int i = 0; i < 1'000; ++i) {
+    numbersLeft.push_back(i);
+  }
+  for (int i = 0; i < size; ++i) {
+    const int randomNumber = Utils::rng(0, static_cast<int>(numbersLeft.size()) - 1);
+    collection->insert({numbersLeft[randomNumber], Utils::rng(0, 1000)});
+    numbersLeft.erase(numbersLeft.begin() + randomNumber);
+  }
+}
 void HashMap::fillFromFile(HashMap& map, const std::string& filename,
                            const int size) {
   std::ifstream ifs(filename);
